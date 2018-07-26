@@ -4,8 +4,6 @@ const client = new Discord.Client();
 
 var prefix = "m!";
 
-const ytdl = require('ytdl-core');
-
 const queue = new Map();
 
 var servers = {};
@@ -106,76 +104,7 @@ client.on('message', async message => {
         .setThumbnail(message.author.avatarURL)
         message.reply("Tu peux regarder tes messages privés !")
         message.author.send(stats_embed);
-
-        break;
         
-  case "play":
-
-    if (!args[1]) {
-
-    message.channel.sendMessage("Indique moi un lien YouTube"); 
-
-    return;
-
-  }
-
-    if(!message.member.voiceChannel) {
-
-    message.channel.sendMessage(":x: Tu n'es dans un salon vocal"); 
-
-    return;
-
-  }
-
-
-    if(!servers[message.guild.id]) servers[message.guild.id] = {
-
-    queue: []
-
-  };
-
-
-  var server = servers[message.guild.id];
-
-
-  server.queue.push(args[1]);
-
-  if(!message.guild.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
-
-  play(connection, message) 
-
-  });
-
-  break; 
-
-  case "skip":
-
-    if(!message.member.voiceChannel) {
-
-    message.channel.sendMessage(":x: Tu dois être dans un salon vocal"); 
-
-    return;
-
-  }
-
-    var server = servers[message.guild.id];
-
-    if(server.dispatcher) server.dispatcher.end();
-
-    break;
-
-  case "stop":
-
-    if(!message.member.voiceChannel) 
-    
-    return message.channel.send(":x: Tu dois être dans un salon vocal");
-
-    message.member.voiceChannel.leave();
-
-    break;
-  
-  }
-
     if(message.content === prefix + "info") {
         var info_embed = new Discord.RichEmbed()
         .setColor("#40A497")
