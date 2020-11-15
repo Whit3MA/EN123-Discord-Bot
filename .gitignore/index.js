@@ -12,7 +12,7 @@ client.login(process.env.TOKEN);
 
 client.on("ready", () => {
 
-    console.log("Le bot est prés à l'utitisation !");
+    console.log("Le bot est pret à l'utitisation !");
     client.user.setGame("m!help V1");
 
 });
